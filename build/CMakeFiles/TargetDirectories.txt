@@ -1,3 +1,3 @@
-/home/azhong/Desktop/os-classDesign/build/CMakeFiles/app.dir
-/home/azhong/Desktop/os-classDesign/build/CMakeFiles/edit_cache.dir
-/home/azhong/Desktop/os-classDesign/build/CMakeFiles/rebuild_cache.dir
+/home/azhong/os-classDesign/build/CMakeFiles/app.dir
+/home/azhong/os-classDesign/build/CMakeFiles/edit_cache.dir
+/home/azhong/os-classDesign/build/CMakeFiles/rebuild_cache.dir

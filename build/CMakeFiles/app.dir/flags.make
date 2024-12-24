@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/azhong/Desktop/os-classDesign/src/include
+CXX_INCLUDES = -I/home/azhong/os-classDesign/src/include
 
 CXX_FLAGS = 
 

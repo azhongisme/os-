@@ -13,38 +13,59 @@ int main() {
   int m;
   std::cin >> m;
 
-  std::cout << "please input m nums to init available\n";
+  std::cout << "please input " << m << "nums to init available\n";
   BankAlgorithm::InitAvailable(m);
 
   std::cout << "please input m nums to init the CPU resource\n";
   BankAlgorithm::InitResource(m);
 
   std::cout << "please init process details\n";
-  while (n--) {
-    std::cout << "please input process name\n";
-    std::string name;
-    std::cin >> name;
+  std::cout << "请输入" << n << "个进程名\n";
+  std::vector<std::string>name;
+  for (int i = 0; i < n; i++) {
+    std::string temp;
+    std::cin >> temp;
+    name.push_back(temp);
+  }
 
+  std::vector<std::vector<int64_t>> max_;
+  std::vector<std::vector<int64_t>> allocation_;
 
-    std::cout << "please input process max\n";
-    std::vector<int64_t> maxn;
-    for (size_t i = 0; i < m; i++) {
+  std::cout << "请输入" << n << "个进程的max\n";
+  for (size_t i = 0 ; i < n; i++) {
+    std::cout << name[i] << ": ";
+    std::vector<int64_t> v;
+    for (size_t j = 0; j < m; j++) {
       int64_t x;
       std::cin >> x;
-      maxn.push_back(x);
+      v.push_back(x);
     }
+    max_.push_back(v);
+  }
 
-    std::cout << "please input process allocation\n";
-
-    std::vector<int64_t> a;
-    for (size_t i = 0; i < m; i++) {
+  std::cout << "请输入" << n << "个进程的allocation\n";
+  for (size_t i = 0 ; i < n; i++) {
+    std::cout << name[i] << ": ";
+    std::vector<int64_t> v;
+    for (size_t j = 0; j < m; j++) {
       int64_t x;
       std::cin >> x;
-      a.push_back(x);
+      v.push_back(x);
     }
-    BankAlgorithm b{name, maxn, a};
-    bank.push_back(b);
+    allocation_.push_back(v);
+  }
+
+  for (int i = 0 ; i < n; i++) {
+    bank.push_back(BankAlgorithm{name[i], max_[i], allocation_[i]});
   }
 
   BankAlgorithm::Show(bank);
+
+  auto order = FindTheResult(bank);
+  if (order == std::nullopt) {
+    std::cout << "there can't find a way to finish these process\n";
+  } else {
+    std::cout << order.value() << std::endl;
+  }
+
 }

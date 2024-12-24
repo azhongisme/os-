@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/azhong/Desktop/os-classDesign/src/bank.cpp" "CMakeFiles/app.dir/src/bank.o" "gcc" "CMakeFiles/app.dir/src/bank.o.d"
-  "/home/azhong/Desktop/os-classDesign/src/main.cpp" "CMakeFiles/app.dir/src/main.o" "gcc" "CMakeFiles/app.dir/src/main.o.d"
+  "/home/azhong/os-classDesign/src/bank.cpp" "CMakeFiles/app.dir/src/bank.o" "gcc" "CMakeFiles/app.dir/src/bank.o.d"
+  "/home/azhong/os-classDesign/src/main.cpp" "CMakeFiles/app.dir/src/main.o" "gcc" "CMakeFiles/app.dir/src/main.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

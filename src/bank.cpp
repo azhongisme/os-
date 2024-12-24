@@ -1,14 +1,16 @@
 #include "bank.h"
+#include <assert.h>
 
+BankAlgorithm::BankAlgorithm(const std::string name, const std::vector<int64_t> m, const std::vector<int64_t> allo) 
+  : name_(name), max_(m), allocation_(allo) {
+    for (size_t i = 0; i < max_.size(); i++) {
+      need_.push_back(max_[i] - allocation_[i]);
+    }
+  }
 
+void BankAlgorithm::UpdateAllocaltion(const std::vector<int64_t> a) { allocation_ = a; }
 
-void BankAlgorithm::UpdateAllocaltion(const std::vector<int64_t> a) {
-  allocation_ = a;
-}
-
-std::vector<int64_t>& BankAlgorithm::GetAvailable() {
-  return available_;
-}
+std::vector<int64_t>& BankAlgorithm::GetAvailable() { return available_; }
 
 void BankAlgorithm::UpdateAvailable() {
   auto a = GetAvailable();
@@ -17,13 +19,9 @@ void BankAlgorithm::UpdateAvailable() {
   }
 }
 
-void BankAlgorithm::SetAvailable(const std::vector<int64_t> a) {
-  available_ = a;
-}
+void BankAlgorithm::SetAvailable(const std::vector<int64_t> a) { available_ = a; }
 
-void BankAlgorithm::SetResource(const std::vector<int64_t> r) {
-  resource_ = r;
-}
+void BankAlgorithm::SetResource(const std::vector<int64_t> r) { resource_ = r; }
 
 void BankAlgorithm::Print() {
   std::cout << "process: " << name_ << " max: ";
@@ -38,8 +36,8 @@ void BankAlgorithm::Print() {
 }
 
 void BankAlgorithm::Show(std::vector<BankAlgorithm> b) {
-  for (auto item : b) {
-    item.Print();
+  for (size_t i = 0; i < b.size(); i++) {
+    b[i].Print();
   }
 }
 
@@ -61,4 +59,23 @@ void BankAlgorithm::InitResource(int n) {
     r.push_back(x);
   }
   BankAlgorithm::SetResource(r);
+}
+
+bool BankAlgorithm::IsFinished() { return is_finished_; }
+
+std::vector<int64_t> BankAlgorithm::GetNeed() { return need_; }
+
+void BankAlgorithm::SetFinish() { is_finished_ = true; }
+
+std::string BankAlgorithm::GetName() { return name_; }
+
+void BankAlgorithm::Request(const std::vector<int64_t> r) {
+  for (size_t i = 0; i < r.size(); i++) {
+    assert(need_[i] >= r[i]);
+  }
+  for (size_t i = 0; i < r.size(); i++) {
+    need_[i] -= r[i];
+    available_[i] -= r[i];
+    allocation_[i] += r[i];
+  }
 }
