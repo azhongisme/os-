@@ -17,6 +17,9 @@ void BankAlgorithm::UpdateAvailable() {
   for (size_t i = 0; i < BankAlgorithm::available_.size(); i++) {
     available_[i] += allocation_[i];
   }
+  allocation_.clear();
+  need_.clear();
+  max_.clear();
 }
 
 void BankAlgorithm::SetAvailable(const std::vector<int64_t> a) { available_ = a; }
@@ -43,6 +46,7 @@ void BankAlgorithm::Show(std::vector<BankAlgorithm> b) {
     for (size_t i = 0; i < BankAlgorithm::resource_.size(); i++) {
       std::cout << BankAlgorithm::resource_[i] << " ";
     }
+    std::cout << "\n";
   } else {
     std::cout << "未初始化\n";
   }

@@ -16,7 +16,7 @@ void menu() {
   std::cout << "4. 重新生成系统资源数据\n";
   std::cout << "0. 退出程序\n";
   std::cout << "*****************************\n";
-  std::cout << "请选择：";
+  std::cout << "请选择：\n";
 }
 
 void allocate(int& n, int& m) {
@@ -63,10 +63,22 @@ void allocate(int& n, int& m) {
     allocation_.push_back(v);
   }
 
+  std::vector<int64_t> r;
+  std::vector<int64_t> a = BankAlgorithm::GetAvailable();
+
   for (int i = 0 ; i < n; i++) {
     bank.push_back(BankAlgorithm{name[i], max_[i], allocation_[i]});
   }
 
+  for (size_t i = 0; i < m; i++) {
+    int64_t temp = 0;
+    for (size_t j = 0; j < n; j++) {
+      temp += allocation_[j][i];
+    }
+    r.push_back(temp + a[i]);
+  }
+
+  BankAlgorithm::SetResource(r);
   bank_ = bank;
 }
 
