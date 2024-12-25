@@ -24,20 +24,34 @@ void BankAlgorithm::SetAvailable(const std::vector<int64_t> a) { available_ = a;
 void BankAlgorithm::SetResource(const std::vector<int64_t> r) { resource_ = r; }
 
 void BankAlgorithm::Print() {
-  std::cout << "process: " << name_ << " max: ";
-  for (auto i : max_) {
-    std::cout << i << " ";
+  if (!max_.empty()) {
+    std::cout << "process: " << name_ << " max: ";
+    for (auto i : max_) {
+      std::cout << i << " ";
+    }
+    std::cout << "allocation: ";
+    for (auto i : allocation_) {
+      std::cout << i << " ";
+    }
+    std::cout << std::endl;
   }
-  std::cout << "allocation: ";
-  for (auto i : allocation_) {
-    std::cout << i << " ";
-  }
-  std::cout << std::endl;
 }
 
 void BankAlgorithm::Show(std::vector<BankAlgorithm> b) {
-  for (size_t i = 0; i < b.size(); i++) {
-    b[i].Print();
+  if (!resource_.empty()) {
+    std::cout << "资源总数：";
+    for (size_t i = 0; i < BankAlgorithm::resource_.size(); i++) {
+      std::cout << BankAlgorithm::resource_[i] << " ";
+    }
+  } else {
+    std::cout << "未初始化\n";
+  }
+
+  if (!b.empty()) {
+    std::cout << "每个进程详情\n";
+    for (size_t i = 0; i < b.size(); i++) {
+      b[i].Print();
+    }
   }
 }
 

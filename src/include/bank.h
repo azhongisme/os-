@@ -51,6 +51,7 @@ public:
   std::vector<int64_t> GetNeed();
 
   std::string GetName();
+
 };
 
 inline bool AllIsFinished(std::vector<BankAlgorithm> &b) {
@@ -83,7 +84,7 @@ inline std::pair<bool, int> IsSafe(std::vector<BankAlgorithm> &b, int index) {
     }
   }
 
-  for (size_t i = 0; i < index; i++) {
+  for (size_t i = 0; i < index && index >= 0; i++) {
     if (b[i].IsFinished()) {
       continue;
     }
