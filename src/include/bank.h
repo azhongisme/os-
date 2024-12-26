@@ -106,6 +106,7 @@ inline std::pair<bool, int> IsSafe(std::vector<BankAlgorithm> &b, int index) {
 inline std::optional<std::string> FindTheResult(std::vector<BankAlgorithm> &b) {
   std::string order = "process order: ";
   auto res = IsSafe(b, -1);
+
   while (res.first && res.second != -1) {
     int index = res.second;
     b[index].SetFinish();

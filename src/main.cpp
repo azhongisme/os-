@@ -7,6 +7,7 @@ std::vector<int64_t> BankAlgorithm::resource_;
 std::vector<BankAlgorithm> bank;
 std::vector<BankAlgorithm> bank_;
 
+int n, m;
 
 void menu() {
   std::cout << "*****************************\n";
@@ -14,6 +15,7 @@ void menu() {
   std::cout << "2. 分析当前系统安全性\n";
   std::cout << "3. 分配资源\n";
   std::cout << "4. 重新生成系统资源数据\n";
+  std::cout << "5. 请求资源\n";
   std::cout << "0. 退出程序\n";
   std::cout << "*****************************\n";
   std::cout << "请选择：\n";
@@ -82,10 +84,26 @@ void allocate(int& n, int& m) {
   bank_ = bank;
 }
 
+void request(int m) {
+  std::cout << m << std::endl;
+  std::cout << "请输入第几个\n";
+  int x;
+  std::cin>>x;
+  std::cout << "请输入申请资源情况\n";
+  std::vector<int64_t> r;
+  for (size_t i  = 0; i < m; i++) {
+    int64_t temp;
+    std::cin >> temp;
+    r.push_back(temp);
+  }
+  bank[x].Request(r);
+  bank_ = bank;
+}
+
 void choose() {
   int x;
   std::cin >> x;
-  int n, m;
+  
   std::optional<std::string> order;
   std::string str;
   switch(x) {
@@ -97,16 +115,15 @@ void choose() {
       order = FindTheResult(bank);
       str = order == std::nullopt ? "找不到安全序列" :  order.value();
       std::cout << str << std::endl;
-      if (order) {
-        bank.clear();
-        bank_.clear();
-      }
       break;
     case 3:
       allocate(n, m);
       break;
     case 4:
       BankAlgorithm::Show(bank_);
+      break;
+    case 5:
+      request(m);
       break;
     default:
       std::cout << "请重新输入\n";
